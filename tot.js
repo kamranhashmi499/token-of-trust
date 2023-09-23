@@ -8,6 +8,7 @@ fetch(window.Shopify.routes.root + 'cart.js')
             var itemIDs = data.items.map(function(item) {
                 return item.id;
             });
+            // change with variant id shown console of checkout page
             if (itemIDs.includes(46610826232098)) {
                 var url = window.Shopify.routes.root + 'cart/update.js';
                 fetch(url, {

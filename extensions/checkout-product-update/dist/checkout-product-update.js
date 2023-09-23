@@ -18369,15 +18369,56 @@ ${errorInfo.componentStack}`);
   var import_jsx_runtime3 = __toESM(require_jsx_runtime2());
   var Checkout_default = reactExtension("purchase.checkout.block.render", () => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Checkout, {}));
   function Checkout() {
-    const { i18n } = useApi();
+    const { i18n, query } = useApi();
+    const [variantID, setVariantID] = (0, import_react7.useState)("");
     const applyCartLinesChange = useApplyCartLinesChange();
     const [showError, setShowError] = (0, import_react7.useState)(false);
     const [totItemAdded, setTotItemAdded] = (0, import_react7.useState)(false);
     const lines = useCartLines();
+    function fetchProducts() {
+      return __async(this, null, function* () {
+        var productID = 8581397774626;
+        try {
+          const { data } = yield query(
+            `query getProductById($id: ID!) {
+          product(id: $id) {
+            id
+            title
+            images(first:1){
+              nodes {
+                url
+              }
+            }
+            variants(first: 1) {
+              nodes {
+                id
+                price {
+                  amount
+                }
+              }
+            }
+          }
+        }`,
+            {
+              variables: { id: `gid://shopify/Product/${productID}` }
+            }
+          );
+          var variantData = data.product.variants.nodes[0].id;
+          setVariantID(variantData);
+          console.log("data :>> ", variantData);
+        } catch (error) {
+          console.error(error);
+        } finally {
+        }
+      });
+    }
+    (0, import_react7.useEffect)(() => {
+      fetchProducts();
+    }, []);
     (0, import_react7.useEffect)(() => {
       if (lines.length > 0 && !totItemAdded) {
         const cartItems = lines.length;
-        const totItemVariantId = "gid://shopify/ProductVariant/46610826232098";
+        const totItemVariantId = variantID != null ? variantID : "";
         const formattedBalance = i18n.formatCurrency(cartItems, {
           inExtensionLocale: true
         });
@@ -18385,17 +18426,19 @@ ${errorInfo.componentStack}`);
           (item) => item.merchandise.id
         );
         const isProductVariantInCart = cartLineProductVariantIds.includes(totItemVariantId);
-        if (!isProductVariantInCart) {
-          applyCartLinesChange({
-            type: "addCartLine",
-            merchandiseId: totItemVariantId,
-            quantity: 1,
-            attributes: [{ key: "price", value: formattedBalance }]
-          });
-          setTotItemAdded(true);
+        if (totItemVariantId) {
+          if (!isProductVariantInCart) {
+            applyCartLinesChange({
+              type: "addCartLine",
+              merchandiseId: totItemVariantId,
+              quantity: 1,
+              attributes: [{ key: "price", value: formattedBalance }]
+            });
+            setTotItemAdded(true);
+          }
         }
       }
-    }, [lines, totItemAdded]);
+    }, [lines, totItemAdded, variantID]);
     (0, import_react7.useEffect)(() => {
       if (showError) {
         const timer = setTimeout(() => setShowError(false), 3e3);

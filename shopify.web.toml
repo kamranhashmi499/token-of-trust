@@ -1,6 +1,6 @@
 name = "remix"
 roles = ["frontend", "backend"]
-webhooks_path = "/webhooks,/ordercreate"
+webhooks_path = "/webhooks"
 
 # Define routes for your Remix application
 [[routes]]

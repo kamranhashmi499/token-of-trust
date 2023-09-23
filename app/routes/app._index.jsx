@@ -50,7 +50,7 @@ export async function action({ request }) {
   scriptTagIds.forEach(deleteScriptTag);
 
   const totLiquidUrl =
-    "https://cdn.shopify.com/s/files/1/0827/0521/9874/files/tot_cf9da68f-664e-4c90-971e-c469e3828423.js?v=1695430910";
+    "https://cdn.shopify.com/s/files/1/0827/0521/9874/files/tot_6c6bdce0-4ab2-47aa-8d87-ff41637faa83.js?v=1695438354";
 
   const query = `
     mutation {

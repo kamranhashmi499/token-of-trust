@@ -2,7 +2,7 @@
 
 name = "tot"
 client_id = "dfdfdee5df77555148da4081a253b2f6"
-application_url = "https://veteran-headquarters-basketball-fs.trycloudflare.com"
+application_url = "https://efforts-provisions-heads-figure.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,write_script_tags,read_script_tags,read_orders"
 
 [auth]
 redirect_urls = [
-  "https://veteran-headquarters-basketball-fs.trycloudflare.com/auth/callback",
-  "https://veteran-headquarters-basketball-fs.trycloudflare.com/auth/shopify/callback",
-  "https://veteran-headquarters-basketball-fs.trycloudflare.com/api/auth/callback"
+  "https://efforts-provisions-heads-figure.trycloudflare.com/auth/callback",
+  "https://efforts-provisions-heads-figure.trycloudflare.com/auth/shopify/callback",
+  "https://efforts-provisions-heads-figure.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
