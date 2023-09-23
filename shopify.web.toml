@@ -1,0 +1,17 @@
+name = "remix"
+roles = ["frontend", "backend"]
+webhooks_path = "/webhooks,/ordercreate"
+
+# Define routes for your Remix application
+[[routes]]
+  handle = "filesystem"
+  source = "src/routes"
+  # Add any other configurations specific to your app
+
+# Define the command to start your development server
+[commands]
+dev = "npm exec remix dev"
+
+# Define paths for the HMR server
+[hmr_server]
+http_paths = ["/ping"]
